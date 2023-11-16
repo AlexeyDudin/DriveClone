@@ -1,0 +1,58 @@
+﻿<metro:MetroWindow x:Class="DriveCopy.SettingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:Dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"  
+        xmlns:local="clr-namespace:DriveCopy"
+        mc:Ignorable="d"
+        x:Name="SettingWindowForm"
+        Title="Настройка Копир v2" Height="200" Width="500">
+    <Window.Resources>
+        <Style TargetType="{x:Type Dialogs:BaseMetroDialog}">
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              Height="50">
+            <ComboBox Margin="5"
+                      metro:TextBoxHelper.Watermark="Имя устройства чтения"
+                      metro:TextBoxHelper.UseFloatingWatermark="True"
+                      ItemsSource="{Binding ElementName=SettingWindowForm, Path=Drives, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding ElementName=SettingWindowForm, Path=Settings.SourcePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+
+        <Grid Grid.Row="1"
+              Height="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Text="{Binding ElementName=SettingWindowForm, Path=Settings.DestPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                     TextAlignment="Right"
+                     Margin="5"
+                     metro:TextBoxHelper.Watermark="Путь к папке назначения"
+                     metro:TextBoxHelper.UseFloatingWatermark="True"
+                     Grid.Column="0"/>
+            <Button Grid.Column="1"
+                    Margin="5"
+                    Content="Выбрать путь для сохранения"
+                    Command="{Binding ElementName=SettingWindowForm, Path=SelectPathCommand, Mode=OneWay}"/>
+        </Grid>
+
+        <Button Content="Сохранить"
+                Click="OkClick"
+                Grid.Row="2"
+                Margin="5"
+                Width="190"
+                HorizontalAlignment="Right"
+                IsDefault="True"/>
+    </Grid>
+</metro:MetroWindow>

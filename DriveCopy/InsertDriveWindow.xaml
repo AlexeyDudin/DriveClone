@@ -1,0 +1,26 @@
+﻿<metro:MetroWindow  xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+                    x:Class="DriveCopy.InsertDriveWindow"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:local="clr-namespace:DriveCopy"
+                    mc:Ignorable="d"
+                    x:Name="InsertDriveForm"
+                    Loaded="InsertDriveForm_Loaded"
+                    Title="Вставьте диск" Height="200" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Label Content="{Binding ElementName=InsertDriveForm, Path=ViewText, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               Grid.Row="0"/>
+        <Button Grid.Row="2"
+                Margin="5"
+                Content="Закрыть дисковод"
+                Command="{Binding ElementName=InsertDriveForm, Path=CloseDriveCommand, Mode=OneWay}"/>
+    </Grid>
+</metro:MetroWindow>

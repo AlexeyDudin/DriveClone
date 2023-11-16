@@ -1,0 +1,84 @@
+﻿<metro:MetroWindow xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls" x:Class="DriveCopy.MainWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:local="clr-namespace:DriveCopy"
+                   xmlns:converters="clr-namespace:Converters;assembly=Converters"
+                   mc:Ignorable="d"
+                   x:Name="MainWindowForm"
+                   Title="Копир v2" Height="450" Width="800">
+    <metro:MetroWindow.Resources>
+        <converters:DateToStringConverter x:Key="DateToStringConverter"/>
+    </metro:MetroWindow.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.ColumnSpan="2">
+            <MenuItem Header="Настройка"
+                      Command="{Binding ElementName=MainWindowForm, Path=ShowSettingsCommand, Mode=OneWay}"/>
+        </Menu>
+
+        <TextBox Grid.Row="1"
+                 Margin="5"
+                 VerticalContentAlignment="Center"
+                 Text="{Binding ElementName=MainWindowForm, Path=Drive.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 metro:TextBoxHelper.Watermark="Номер диска по учету службы"
+                 metro:TextBoxHelper.UseFloatingWatermark="True"/>
+        <TextBox Grid.Row="2"
+                 Margin="5"
+                 VerticalContentAlignment="Center"
+                 Text="{Binding ElementName=MainWindowForm, Path=Drive.SecondName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 metro:TextBoxHelper.Watermark="Номер диска по ПД учету"
+                 metro:TextBoxHelper.UseFloatingWatermark="True"/>
+
+        <TextBox Grid.Row="3"
+                 Grid.Column="0"
+                 Margin="5"
+                 VerticalContentAlignment="Center"
+                 metro:TextBoxHelper.Watermark="Номер письма"
+                 metro:TextBoxHelper.UseFloatingWatermark="True"
+                 Text="{Binding ElementName=MainWindowForm, Path=Drive.Post.Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <DatePicker Grid.Row="3"
+                    Margin="5"
+                    Grid.Column="1"
+                    VerticalContentAlignment="Center"
+                    metro:TextBoxHelper.Watermark="Дата утверждения"
+                    metro:TextBoxHelper.UseFloatingWatermark="True"
+                    SelectedDate="{Binding ElementName=MainWindowForm, Path=Drive.Post.DateStamp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBox Grid.Row="4"
+                 Grid.Column="0"
+                 Margin="5"
+                 VerticalContentAlignment="Center"
+                 metro:TextBoxHelper.Watermark="Вх. номер письма"
+                 metro:TextBoxHelper.UseFloatingWatermark="True"
+                 Text="{Binding ElementName=MainWindowForm, Path=Drive.Post.NumberIncome, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <DatePicker Grid.Row="4"
+                    Grid.Column="1"
+                    Margin="5"
+                    metro:TextBoxHelper.Watermark="Дата поступления"
+                    metro:TextBoxHelper.UseFloatingWatermark="True"
+                    SelectedDate="{Binding ElementName=MainWindowForm, Path=Drive.Post.DateIncome, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <Button Content="Следующий этап"
+                Grid.Column="1"
+                Grid.Row="6"
+                Margin="5"
+                Width="150"
+                HorizontalAlignment="Right"
+                Command="{Binding ElementName=MainWindowForm, Path=ShowSetDriveDialogCommand}"/>
+    </Grid>
+</metro:MetroWindow>

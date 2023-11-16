@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="ApplicationForms.LoadForm.LoadFormInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ApplicationForms.LoadForm"
+             xmlns:converters="clr-namespace:Converters;assembly=Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:ValueIsNullToVisibleConverter x:Key="IsVisibleConverter"/>
+    </UserControl.Resources>
+    <Grid Grid.Row="1"
+              Grid.Column="1"
+              Margin="2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+               VerticalAlignment="Center"
+               x:Name="fileName"
+               Visibility="{Binding Path=DataContext, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, Converter={StaticResource IsVisibleConverter}}"
+               Content="{Binding Path=Label, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+
+        <ProgressBar HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     Grid.Row="1"
+                     Minimum="0"
+                     x:Name="ProgressBarAllFiles"
+                     Height="20"
+                     Visibility="{Binding Path=DataContext, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, Converter={StaticResource IsVisibleConverter}}"
+                     Value="{Binding Path=PositionInElements, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                     Maximum="{Binding Path=MaxElements, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                     Panel.ZIndex="0"/>
+
+        <ProgressBar HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     Grid.Row="3"
+                     Minimum="0"
+                     Height="20"
+                     x:Name="ProgressBarCurrentFile"
+                     Visibility="{Binding Path=DataContext, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, Converter={StaticResource IsVisibleConverter}}"
+                     Value="{Binding Path=PositionInCurrentElement, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                     Maximum="{Binding Path=CurrentElementVolume, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                     Panel.ZIndex="0"/>
+
+        <!--<Label Grid.Row="1"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Content="{Binding Path=MaxPercent, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, StringFormat=\{0:0.2\}}"
+               Visibility="{Binding Path=MaxPercent, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource IsVisibleConverter}}"
+               Panel.ZIndex="1"/>
+        <Label Grid.Row="3"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Content="{Binding Path=CurrPercent, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+               Visibility="{Binding Path=CurrPercent, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource IsVisibleConverter}}"
+               Panel.ZIndex="1"/>-->
+    </Grid>
+</UserControl>
