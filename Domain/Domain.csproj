@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CkoType.cs" />
+    <Compile Include="VidType.cs" />
     <Compile Include="DriveInfo.cs" />
     <Compile Include="DriveType.cs" />
     <Compile Include="EnumTypeConverter.cs" />

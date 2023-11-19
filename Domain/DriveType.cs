@@ -5,18 +5,18 @@ namespace Domain
     [TypeConverter(typeof(EnumTypeConverter))]
     public enum DriveType
     {
-        [Description("Загрузочный")]
+        [Description("Инсталляционный")]
         loader,
-        [Description("Дистрибутивный")]
+        [Description("С исходниками")]
         distributive,
-        [Description("Шлюзовой")]
-        shluz,
-        [Description("С шаблонами")]
-        shablon,
-        [Description("Диск разработчика")]
-        developer,
-        [Description("Диск с дополнениями")]
-        dopPo
+        [Description("Тип 3")]
+        type_3,
+        [Description("Тип 4")]
+        type_4,
+        [Description("Тип 5")]
+        type_5,
+        [Description("Тип 6")]
+        type_6
     }
 
     public static class DriveTypeConverter
@@ -24,17 +24,17 @@ namespace Domain
         public static string ToConvertedString(this DriveType diskType)
         {
             if (diskType == DriveType.loader)
-                return "LOAD";
+                return "INST";
             else if (diskType == DriveType.distributive)
                 return "DIST";
-            else if (diskType == DriveType.shluz)
-                return "SHLUZ";
-            else if (diskType == DriveType.shablon)
-                return "SHB";
-            else if (diskType == DriveType.developer)
-                return "DEV";
-            else if (diskType == DriveType.dopPo)
-                return "DOP";
+            else if (diskType == DriveType.type_3)
+                return "TYPE3";
+            else if (diskType == DriveType.type_4)
+                return "TYPE4";
+            else if (diskType == DriveType.type_5)
+                return "TYPE5";
+            else if (diskType == DriveType.type_6)
+                return "TYPE6";
             else
                 return "";
         }

@@ -7,11 +7,11 @@ namespace Domain
     public class DriveInfo: INotifyPropertyChanged
     {
         private string firstName = "";
-        private string secondName = "149/4/ПД/";
+        private string secondName = "";
         private string ckoNumAndVer = "";
         private Post post = new Post();
         private DriveType driveType = DriveType.loader;
-        private CkoType ckoType = CkoType.cko;
+        private VidType ckoType = VidType.type1;
 
         public string FirstName 
         { 
@@ -58,7 +58,7 @@ namespace Domain
                 OnPropertyChanged(nameof(CkoNumAndVer));
             }
         }
-        public CkoType CkoType 
+        public VidType CkoType 
         { 
             get => ckoType;
             set

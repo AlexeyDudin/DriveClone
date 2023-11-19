@@ -20,23 +20,23 @@ namespace FileHandler
         //private static Timer timer;
         public static Domain.DriveType GetDriveType(string path)
         {
-            if (IsLoader(path))
+            if (IsInstall(path))
                 return Domain.DriveType.loader;
-            if (IsNt(path))
-                return Domain.DriveType.shluz;
+            if (IsType3(path))
+                return Domain.DriveType.type_3;
             if (IsDistrib(path))
                 return Domain.DriveType.distributive;
-            return Domain.DriveType.shablon;
+            return Domain.DriveType.type_4;
         }
-        public static CkoType GetCkoType(string path)
+        public static VidType GetVidType(string path)
         {
-            if (IsCko(path))
-                return CkoType.cko;
-            if (IsUpo(path))
-                return CkoType.upo;
-            return CkoType.um;
+            if (IsType1(path))
+                return VidType.type1;
+            if (IsType2(path))
+                return VidType.type2;
+            return VidType.type3;
         }
-        public static string GetCkoName(string path)
+        public static string GetDriveName(string path)
         {
             DirectoryInfo di = new DirectoryInfo(path);
             List<DirectoryInfo> directories = di.EnumerateDirectories("*_*.*", SearchOption.TopDirectoryOnly).ToList();
@@ -97,10 +97,10 @@ namespace FileHandler
             return;
         }
 
-        private static bool IsLoader(string path)
+        private static bool IsInstall(string path)
         {
             DirectoryInfo di = new DirectoryInfo(path);
-            var files = di.EnumerateFiles("copy_*.bat", SearchOption.TopDirectoryOnly);
+            var files = di.EnumerateFiles("*.bat", SearchOption.TopDirectoryOnly);
             if (!files.Any())
             {
                 files = di.EnumerateFiles("install.exe", SearchOption.TopDirectoryOnly);
@@ -108,12 +108,13 @@ namespace FileHandler
             }
             return true;
         }
-        private static bool IsNt(string path)
+        private static bool IsType3(string path)
         {
             DirectoryInfo di = new DirectoryInfo(path);
-            var directories = di.EnumerateDirectories("NT_*.*", SearchOption.TopDirectoryOnly);
+            var directories = di.EnumerateDirectories("TYPE2_*.*", SearchOption.TopDirectoryOnly);
             return directories.Any();
         }
+
         private static bool IsDistrib(string path)
         {
             DirectoryInfo di = new DirectoryInfo(path);
@@ -122,16 +123,16 @@ namespace FileHandler
         }
 
 
-        private static bool IsUpo(string path)
+        private static bool IsType2(string path)
         {
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
-            var directories = directoryInfo.EnumerateDirectories("UPO_*.*", SearchOption.TopDirectoryOnly);
+            var directories = directoryInfo.EnumerateDirectories("TYPE2_*.*", SearchOption.TopDirectoryOnly);
             return directories.Any();
         }
-        private static bool IsCko(string path)
+        private static bool IsType1(string path)
         {
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
-            var directories = directoryInfo.EnumerateDirectories("CKO_*.*", SearchOption.TopDirectoryOnly);
+            var directories = directoryInfo.EnumerateDirectories("TYPE1_*.*", SearchOption.TopDirectoryOnly);
             return directories.Any();
         }
     }

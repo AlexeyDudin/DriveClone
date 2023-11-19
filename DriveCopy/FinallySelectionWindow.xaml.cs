@@ -40,8 +40,8 @@ namespace DriveCopy
             Settings = settings;
             DriveInfo = driveInfo;
             DriveInfo.DriveType = DriveHandler.GetDriveType(Settings.SourcePath);
-            DriveInfo.CkoType = DriveHandler.GetCkoType(Settings.SourcePath);
-            DriveInfo.CkoNumAndVer = DriveHandler.GetCkoName(Settings.SourcePath);
+            DriveInfo.CkoType = DriveHandler.GetVidType(Settings.SourcePath);
+            DriveInfo.CkoNumAndVer = DriveHandler.GetDriveName(Settings.SourcePath);
         }
 
         public Settings Settings 
